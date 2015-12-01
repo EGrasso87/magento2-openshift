@@ -9,6 +9,8 @@ chmod -R 777 $OPENSHIFT_REPO_DIR/public/var $OPENSHIFT_REPO_DIR/public/pub
 cd $OPENSHIFT_REPO_DIR/public && composer config repo.magento.com $API_KEY $API_SECRET && composer install --no-dev
 # Copy etc settings
 cp  $OPENSHIFT_REPO_DIR/*.php $OPENSHIFT_REPO_DIR/public/app/etc/
+# Import sample DB data
+zcat$OPENSHIFT_REPO_DIR/*.sql.gz | mysql
 # Deploy statics
 #$OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy
 #php $OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy -vvv
