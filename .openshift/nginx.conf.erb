@@ -30,8 +30,10 @@ server {
     listen  <%= ENV['OPENSHIFT_NGINX_IP'] %>:<%= ENV['OPENSHIFT_NGINX_PORT'] %>;
     root    <%= ENV['OPENSHIFT_REPO_DIR'] %>/public;
     index index.php;
-    autoindex off;	
+    autoindex off;
     charset off;
+    server_name demo-mage2.rhcloud.com;
+
 
     location / {
         index  index.html index.htm index.php;
@@ -44,15 +46,19 @@ server {
             fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
             include <%= ENV['OPENSHIFT_NGINX_DIR'] %>/usr/nginx-<%= ENV['OPENSHIFT_NGINX_VERSION'] %>/conf/fastcgi_params;
         }
-    
+
         location ~ ^/setup/(?!pub/). {
             deny all;
         }
-    
+
         location ~ ^/setup/pub/ {
             add_header X-Frame-Options "SAMEORIGIN";
         }
     }
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
     # pass the PHP scripts to PHP-FPM
     location ~ \.php$ {
         fastcgi_pass unix:<%= ENV['OPENSHIFT_PHP_SOCKET'] %>;
