@@ -10,7 +10,7 @@ cd $OPENSHIFT_REPO_DIR/public && composer config http-basic.repo.magento.com $AP
 # Copy etc settings
 cp  $OPENSHIFT_REPO_DIR/*.php $OPENSHIFT_REPO_DIR/public/app/etc/
 # Import sample DB data
-zcat $OPENSHIFT_REPO_DIR/*.sql.gz | mysql
+zcat $OPENSHIFT_REPO_DIR/*.sql.gz | mysql $OPENSHIFT_GEAR_NAME
 # Deploy statics
 #$OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy
 #php $OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy -vvv
