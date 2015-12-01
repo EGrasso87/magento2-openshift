@@ -6,8 +6,8 @@ cd $OPENSHIFT_REPO_DIR/public && find . -type d -exec chmod 770 {} \; && find . 
 chmod -R 777 $OPENSHIFT_REPO_DIR/public/var $OPENSHIFT_REPO_DIR/public/pub
 #ln -sf $OPENSHIFT_DATA_DIR/vendor $OPENSHIFT_REPO_DIR/public/vendor
 # Composer install in magento root folder (symlinking doesnt work for some reason...)
-cd $OPENSHIFT_REPO_DIR/public && composer config repo.magento.com $YOUR_API_KEY $YOUR_API_SECRET && composer install --no-dev
+cd $OPENSHIFT_REPO_DIR/public && composer config repo.magento.com $API_KEY $API_SECRET && composer install --no-dev
 # Copy etc settings
 cp -r $OPENSHIFT_DATA_DIR/etc/* $OPENSHIFT_REPO_DIR/public/app/etc/
 # Deploy statics
-$OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy
+#$OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy
