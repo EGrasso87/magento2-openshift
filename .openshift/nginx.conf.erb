@@ -35,9 +35,6 @@ server {
     server_name demo-mage2.rhcloud.com;
 
 
-    location / {
-        index  index.html index.htm index.php;
-    }
     location /setup {
         root    <%= ENV['OPENSHIFT_REPO_DIR'] %>/public;
         location ~ ^/setup/index.php {
