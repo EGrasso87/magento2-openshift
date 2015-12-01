@@ -29,9 +29,29 @@ gzip_vary           on;
 server {
     listen  <%= ENV['OPENSHIFT_NGINX_IP'] %>:<%= ENV['OPENSHIFT_NGINX_PORT'] %>;
     root    <%= ENV['OPENSHIFT_REPO_DIR'] %>/public;
+    index index.php;
+    autoindex off;	
+    charset off;
 
     location / {
-        index  index.html index.htm;
+        index  index.html index.htm index.php;
+    }
+    location /setup {
+        root    <%= ENV['OPENSHIFT_REPO_DIR'] %>/public;
+        location ~ ^/setup/index.php {
+            fastcgi_pass unix:<%= ENV['OPENSHIFT_PHP_SOCKET'] %>;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include <%= ENV['OPENSHIFT_NGINX_DIR'] %>/usr/nginx-<%= ENV['OPENSHIFT_NGINX_VERSION'] %>/conf/fastcgi_params;
+        }
+    
+        location ~ ^/setup/(?!pub/). {
+            deny all;
+        }
+    
+        location ~ ^/setup/pub/ {
+            add_header X-Frame-Options "SAMEORIGIN";
+        }
     }
     # pass the PHP scripts to PHP-FPM
     location ~ \.php$ {
