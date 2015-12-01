@@ -9,3 +9,5 @@ chmod -R 777 $OPENSHIFT_REPO_DIR/public/var $OPENSHIFT_REPO_DIR/public/pub
 cd $OPENSHIFT_REPO_DIR/public && composer install --no-dev
 # Copy etc settings
 cp -r $OPENSHIFT_DATA_DIR/etc/* $OPENSHIFT_REPO_DIR/public/app/etc/
+# Deploy statics
+$OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy
