@@ -1,4 +1,3 @@
-set $MAGE_MODE default; # or production or developer
 #
 # Enable Gzip
 gzip  on;
@@ -29,6 +28,7 @@ gzip_disable        "MSIE [1-6]\.";
 gzip_vary           on;
 
 server {
+    set $MAGE_MODE default; # or production or developer
     listen  <%= ENV['OPENSHIFT_NGINX_IP'] %>:<%= ENV['OPENSHIFT_NGINX_PORT'] %>;
     root    <%= ENV['OPENSHIFT_REPO_DIR'] %>/public;
     index index.php;
