@@ -1,4 +1,3 @@
-Repo layout
 ===========
 php/ - Externally exposed php code goes here
 libs/ - Additional libraries
