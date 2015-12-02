@@ -1,6 +1,6 @@
 #!/bin/bash
 # Hacky way to free up some space
-rm -fr $OPENSHIFT_DEPLOYMENTS_DIR/*/repo/
+rm -fr $OPENSHIFT_DEPLOYMENTS_DIR/*/repo/ $OPENSHIFT_REPO_DIR/public/dev/*
 # Fix permissions
 cd $OPENSHIFT_REPO_DIR/public && find . -type d -exec chmod 770 {} \; && find . -type f -exec chmod 660 {} \; && chmod u+x bin/magento
 chmod -R 777 $OPENSHIFT_REPO_DIR/public/var $OPENSHIFT_REPO_DIR/public/pub
@@ -9,6 +9,8 @@ chmod -R 777 $OPENSHIFT_REPO_DIR/public/var $OPENSHIFT_REPO_DIR/public/pub
 cd $OPENSHIFT_REPO_DIR/public && composer config http-basic.repo.magento.com $API_KEY $API_SECRET && composer install --no-dev
 # Copy etc settings
 cp  $OPENSHIFT_REPO_DIR/*.php $OPENSHIFT_REPO_DIR/public/app/etc/
+# Create db
+${OPENSHIFT_DATA_DIR}.mysql/bin/mysql --socket=${TMP}mysql.sock -u root -e "CREATE DATABASE $OPENSHIFT_GEAR_NAME;GRANT ALL PRIVILEGES ON $OPENSHIFT_GEAR_NAME.* TO '$OPENSHIFT_MYSQL_DB_USERNAME'@'%' IDENTIFIED BY '$OPENSHIFT_MYSQL_DB_PASSWORD'; FLUSH PRIVILEGES;"
 # Import sample DB data
 zcat $OPENSHIFT_REPO_DIR/*.sql.gz | mysql $OPENSHIFT_GEAR_NAME -h $DB_HOST -u $OPENSHIFT_MYSQL_DB_USERNAME -p"$OPENSHIFT_MYSQL_DB_PASSWORD" -P $DB_PORT
 # Deploy statics
