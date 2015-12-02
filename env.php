@@ -23,7 +23,7 @@ return array (
     array (
       'default' =>
       array (
-        'host' => getenv('OPENSHIFT_MYSQL_DB_HOST') . ':' . getenv('OPENSHIFT_MYSQL_DB_PORT'),
+        'host' => getenv('DB_HOST') . ':' . getenv('DB_PORT'),
         'dbname' => getenv('OPENSHIFT_GEAR_NAME'),
         'username' => getenv('OPENSHIFT_MYSQL_DB_USERNAME'),
         'password' => getenv('OPENSHIFT_MYSQL_DB_PASSWORD'),
