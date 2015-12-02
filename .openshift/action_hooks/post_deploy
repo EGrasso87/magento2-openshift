@@ -1,6 +1,6 @@
 #!/bin/bash
 # Hacky way to free up some space
-rm -fr $OPENSHIFT_DEPLOYMENTS_DIR/*/repo/ $OPENSHIFT_REPO_DIR/public/dev/*
+rm -fr $OPENSHIFT_DEPLOYMENTS_DIR/*/repo/ $OPENSHIFT_REPO_DIR/public/dev/* $OPENSHIFT_REPO_DIR/public/setup/* $OPENSHIFT_REPO_DIR/app/design/frontend/Magento/blank/* ~/php/composer/.composer/cache/*
 # Fix permissions
 cd $OPENSHIFT_REPO_DIR/public && find . -type d -exec chmod 770 {} \; && find . -type f -exec chmod 660 {} \; && chmod u+x bin/magento
 chmod -R 777 $OPENSHIFT_REPO_DIR/public/var $OPENSHIFT_REPO_DIR/public/pub
