@@ -61,11 +61,11 @@ return array (
   'cache' => [
       'frontend' => [
           'default' => [
-              'backend' => 'Zend_Cache_Backend_Apc',
+              'backend' => 'Zend_Cache_Backend_File',
               'backend_options' => [],
           ],
           'page_cache' => [
-              'backend' => 'Zend_Cache_Backend_Apc',
+              'backend' => 'Zend_Cache_Backend_File',
               'backend_options' => [],
           ]
       ]
