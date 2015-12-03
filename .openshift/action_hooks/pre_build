@@ -1,0 +1,3 @@
+#More hacks to reduce hard disk usage!
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+grep -f $DIR/../my.cnf $OPENSHIFT_DATA_DIR/.mysql/my.cnf || cat $DIR/../my.cnf  >> $OPENSHIFT_DATA_DIR/.mysql/my.cnf
