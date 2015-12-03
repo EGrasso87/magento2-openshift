@@ -7,6 +7,8 @@ chmod -R 777 $OPENSHIFT_REPO_DIR/public/var $OPENSHIFT_REPO_DIR/public/pub
 #ln -sf $OPENSHIFT_DATA_DIR/vendor $OPENSHIFT_REPO_DIR/public/vendor
 # Composer install in magento root folder (symlinking doesnt work for some reason...)
 cd $OPENSHIFT_REPO_DIR/public && composer config http-basic.repo.magento.com $API_KEY $API_SECRET && composer install --no-dev
+# Clear composer cache after running composer install
+rm -fr ~/php/composer/.composer/cache/*
 # Copy etc settings
 cp  $OPENSHIFT_REPO_DIR/*.php $OPENSHIFT_REPO_DIR/public/app/etc/
 # Create db
