@@ -16,5 +16,6 @@ ${OPENSHIFT_DATA_DIR}.mysql/bin/mysql --socket=${TMP}mysql.sock -u root -e "CREA
 # Import sample DB data
 zcat $OPENSHIFT_REPO_DIR/*.sql.gz | mysql $OPENSHIFT_GEAR_NAME -h $DB_HOST -u $OPENSHIFT_MYSQL_DB_USERNAME -p"$OPENSHIFT_MYSQL_DB_PASSWORD" -P $DB_PORT
 # Deploy statics
-#$OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy
-#php $OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy -vvv
+php $OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy
+# Free up more space again
+rm -fr $OPENSHIFT_REPO_DIR/public/pub/static/frontend/Magento/blank/
