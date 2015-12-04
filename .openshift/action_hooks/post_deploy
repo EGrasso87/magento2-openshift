@@ -17,3 +17,6 @@ ${OPENSHIFT_DATA_DIR}.mysql/bin/mysql --socket=${TMP}mysql.sock -u root -e "CREA
 zcat $OPENSHIFT_REPO_DIR/*.sql.gz | mysql $OPENSHIFT_GEAR_NAME -h $DB_HOST -u $OPENSHIFT_MYSQL_DB_USERNAME -p"$OPENSHIFT_MYSQL_DB_PASSWORD" -P $DB_PORT
 # Deploy statics
 php $OPENSHIFT_REPO_DIR/public/bin/magento setup:static-content:deploy
+ln -s en_US $OPENSHIFT_REPO_DIR/public/pub/static/adminhtml/Magento/backend/en_GB
+# Clean cache
+php $OPENSHIFT_REPO_DIR/public/bin/magento cache:clean
