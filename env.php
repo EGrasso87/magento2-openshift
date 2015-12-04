@@ -58,16 +58,4 @@ return array (
     'translate' => 1,
     'config_webservice' => 1,
   ),
-  'cache' => [
-      'frontend' => [
-          'default' => [
-              'backend' => 'Zend_Cache_Backend_File',
-              'backend_options' => [],
-          ],
-          'page_cache' => [
-              'backend' => 'Zend_Cache_Backend_File',
-              'backend_options' => [],
-          ]
-      ]
-  ]
 );
